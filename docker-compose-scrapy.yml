@@ -1,0 +1,11 @@
+version: '3'
+
+
+services:
+    okex_ws_tikcer_spot:
+        image: registry.cn-shanghai.aliyuncs.com/ahrli_work/airflow_dag:scrapy_v1
+        ports:
+            - "6800:6800"
+        volumes:
+            - /home/scrapyd-file/binance/logs:/logs
+            - /home/scrapyd-file/binance/eggs:/eggs
