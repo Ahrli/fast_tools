@@ -1,10 +1,10 @@
 [core]
 # The folder where your airflow pipelines live, most likely a
-# subfolder in a code repository. This path must be absolute. 任务执行文件存放位置
+# subfolder in a code repository. This path must be absolute.
 dags_folder = /usr/local/airflow/dags
 
 # The folder where airflow should store its log files
-# This path must be absolute 错误文件执行位置
+# This path must be absolute
 base_log_folder = /usr/local/airflow/logs
 
 # Airflow can store logs remotely in AWS S3, Google Cloud Storage or Elastic Search.
