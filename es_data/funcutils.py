@@ -13,6 +13,8 @@ from retrying import retry
 import requests
 import json
 # http代理接入服务器地址端口
+from sqlalchemy import create_engine
+
 proxyHost = "http-proxy-t3.dobel.cn"
 proxyPort = "9180"
 # 账号密码
@@ -65,3 +67,14 @@ def serialize(hit):
             fields.append(k['_source'])
         return fields
 # cd /dags/tyre && /root/anaconda3/bin/python3  jybd_main.py
+def w_ods(df, db, table, if_exists):
+    '''
+    '''
+
+    engine = create_engine(
+        #         f'mysql+pymysql://root:LOOP2themoon@rm-uf6rozhp0o3za68tt.mysql.rds.aliyuncs.com:3306/loop_coin?charset=utf8'
+        #         f'mysql+pymysql://zhangyulei:VXjh79q7QXeunQLc@rm-wz93i2t71vgjuuj33.mysql.rds.aliyuncs.com:3306/?charset=utf8'
+        f"mysql+pymysql://hqp_haitao:hqp_haitao@123@172.16.9.232:3306/{db}?charset=utf8"
+    )
+
+    df.to_sql(table, engine, if_exists=if_exists)

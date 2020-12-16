@@ -1,4 +1,0 @@
-2020-10-12 19:03:12,909 - base.py[line:184] - INFO: POST http://192.168.80.183:9200/coin_min1_a/_count [status:200 request:0.040s]
-2020-10-12 19:03:20,198 - base.py[line:184] - INFO: POST http://192.168.80.183:9200/coin_min1_a/_search?scroll=10m&size=10000 [status:200 request:2.522s]
-2020-10-12 19:03:33,479 - base.py[line:184] - INFO: POST http://192.168.80.183:9200/_search/scroll?scroll=10m [status:200 request:0.964s]
-2020-10-12 19:03:47,623 - base.py[line:184] - INFO: POST http://192.168.80.183:9200/_search/scroll?scroll=10m [status:200 request:0.865s]

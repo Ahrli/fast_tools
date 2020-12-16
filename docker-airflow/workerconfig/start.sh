@@ -10,3 +10,5 @@ cd /usr/local/airflow/workerconfig
 #nohup airflow webserver >>/opt/airflow/logs/webserver.log 2>&1 &
 nohup airflow worker >>/usr/local/airflow/logs/worker.log 2>&1 &
 #nohup airflow scheduler >>/opt/airflow/logs/scheduler.log 2>&1 &
+nohup airflow worker >>/dfs/airflow/logs/worker.log 2>&1 &
+
