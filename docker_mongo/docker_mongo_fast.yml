@@ -11,6 +11,9 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: 123456
+    volumes:
+            - ./storage:/var/lib/mongodb
+            - ./logs:/var/log/mongodb/mongod.log
 
   mongo-express:
     image: mongo-express
