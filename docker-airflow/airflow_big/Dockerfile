@@ -7,14 +7,12 @@
 FROM python:3.7-slim-buster
 LABEL maintainer="Puckel_"
 
-
-
-
 # Never prompt the user for choices on installation/configuration of packages
 ENV DEBIAN_FRONTEND noninteractive
 ENV TERM linux
+
 # Airflow
-ARG AIRFLOW_VERSION=1.10.10
+ARG AIRFLOW_VERSION=1.10.9
 ARG AIRFLOW_USER_HOME=/usr/local/airflow
 ARG AIRFLOW_DEPS=""
 ARG PYTHON_DEPS=""
@@ -26,7 +24,7 @@ ENV LANG en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 ENV LC_CTYPE en_US.UTF-8
 ENV LC_MESSAGES en_US.UTF-8
-ENV AIRFLOW__CORE__DEFAULT_TIMEZONE=Asia/Shanghai
+
 # Disable noisy "Handling signal" log messages:
 # ENV GUNICORN_CMD_ARGS --log-level WARNING
 
@@ -78,20 +76,11 @@ RUN set -ex \
 COPY script/entrypoint.sh /entrypoint.sh
 COPY config/airflow.cfg ${AIRFLOW_USER_HOME}/airflow.cfg
 
-
 RUN chown -R airflow: ${AIRFLOW_USER_HOME}
 
 EXPOSE 8080 5555 8793
-RUN apt-get install  tzdata
-#RUN cp -f /usr/share/zoneinfo/Asia/Shanghai     /etc/localtime
-RUN echo 'Asia/Shanghai' >/etc/timezone
-#ENV TZ=Asia/Shanghai
-RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 USER airflow
-
-#RUN apt-get install  tzdata
-
 WORKDIR ${AIRFLOW_USER_HOME}
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["webserver"]

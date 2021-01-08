@@ -12,15 +12,14 @@ services:
             - POSTGRES_USER=airflow
             - POSTGRES_PASSWORD=airflow
             - POSTGRES_DB=airflow
-        # Uncomment these lines to persist data on the local filesystem.
-        #     - PGDATA=/var/lib/postgresql/data/pgdata
-        # volumes:
-        #     - ./pgdata:/var/lib/postgresql/data/pgdata
+            - PGDATA=/var/lib/postgresql/data/pgdata
+        volumes:
+            - /dfs/airflow/pgdata:/var/lib/postgresql/data/pgdata
         ports:
             - "5432:5432"
 
     webserver:
-        image: ahrli/docker-airflow
+        image: registry.cn-shanghai.aliyuncs.com/ahrli_work/airflow_dag:airflow_v1.10.10
         restart: always
         depends_on:
             - postgres
@@ -38,7 +37,7 @@ services:
             # - REDIS_PASSWORD=redispass
         volumes:
             - ./dags:/usr/local/airflow/dags
-            - ./logs:/usr/local/airflow/logs
+            - /dfs/airflow/logs:/usr/local/airflow/logs
             - ./config/webserver_config.py:/usr/local/airflow/webserver_config.py
             - ./airflow.cfg:/usr/local/airflow/airflow.cfg
             # Uncomment to include custom plugins
@@ -53,7 +52,7 @@ services:
             retries: 3
 
     flower:
-        image: ahrli/docker-airflow
+        image: registry.cn-shanghai.aliyuncs.com/ahrli_work/airflow_dag:airflow_v1.10.10
         restart: always
         depends_on:
             - redis
@@ -69,13 +68,13 @@ services:
         command: flower
 
     scheduler:
-        image: ahrli/docker-airflow
+        image: registry.cn-shanghai.aliyuncs.com/ahrli_work/airflow_dag:airflow_v1.10.10
         restart: always
         depends_on:
             - webserver
         volumes:
             - ./dags:/usr/local/airflow/dags
-            - ./logs:/usr/local/airflow/logs
+            - /dfs/airflow/logs:/usr/local/airflow/logs
             - ./airflow.cfg:/usr/local/airflow/airflow.cfg
             # Uncomment to include custom plugins
             # - ./plugins:/usr/local/airflow/plugins

@@ -20,7 +20,7 @@ services:
             - "5432:5432"
 
     webserver:
-        image: ahrli/docker-airflow
+        image: puckel/docker-airflow:1.10.9
         restart: always
         depends_on:
             - postgres
@@ -31,7 +31,6 @@ services:
             - EXECUTOR=Celery
             - AIRFLOW__WEBSERVER__RBAC=true
             - AIRFLOW__CORE__DEFAULT_TIMEZONE=Asia/Shanghai
-            - AIRFLOW__CORE__FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
             # - POSTGRES_USER=airflow
             # - POSTGRES_PASSWORD=airflow
             # - POSTGRES_DB=airflow
@@ -53,23 +52,20 @@ services:
             retries: 3
 
     flower:
-        image: ahrli/docker-airflow
+        image: puckel/docker-airflow:1.10.9
         restart: always
         depends_on:
             - redis
         environment:
             - EXECUTOR=Celery
             - AIRFLOW__CORE__DEFAULT_TIMEZONE=Asia/Shanghai
-            - AIRFLOW__CORE__FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
             # - REDIS_PASSWORD=redispass
-        volumes:
-            - ./airflow.cfg:/usr/local/airflow/airflow.cfg
         ports:
             - "5555:5555"
         command: flower
 
     scheduler:
-        image: ahrli/docker-airflow
+        image: puckel/docker-airflow:1.10.9
         restart: always
         depends_on:
             - webserver
@@ -84,7 +80,6 @@ services:
             - FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
             - EXECUTOR=Celery
             - AIRFLOW__CORE__DEFAULT_TIMEZONE=Asia/Shanghai
-            - AIRFLOW__CORE__FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
             # - POSTGRES_USER=airflow
             # - POSTGRES_PASSWORD=airflow
             # - POSTGRES_DB=airflow

@@ -20,7 +20,7 @@ services:
             - "5432:5432"
 
     webserver:
-        image: ahrli/docker-airflow
+        image: puckel/docker-airflow:1.10.9
         restart: always
         depends_on:
             - postgres
@@ -29,18 +29,14 @@ services:
             - LOAD_EX=n
             - FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
             - EXECUTOR=Celery
-            - AIRFLOW__WEBSERVER__RBAC=true
-            - AIRFLOW__CORE__DEFAULT_TIMEZONE=Asia/Shanghai
-            - AIRFLOW__CORE__FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
             # - POSTGRES_USER=airflow
             # - POSTGRES_PASSWORD=airflow
             # - POSTGRES_DB=airflow
             # - REDIS_PASSWORD=redispass
         volumes:
             - ./dags:/usr/local/airflow/dags
-            - ./logs:/usr/local/airflow/logs
-            - ./config/webserver_config.py:/usr/local/airflow/webserver_config.py
-            - ./airflow.cfg:/usr/local/airflow/airflow.cfg
+            - /dfs/airflow/logs:/usr/local/airflow/logs
+            - ./config/airflow.cfg:/usr/local/airflow/airflow.cfg
             # Uncomment to include custom plugins
             # - ./plugins:/usr/local/airflow/plugins
         ports:
@@ -53,38 +49,32 @@ services:
             retries: 3
 
     flower:
-        image: ahrli/docker-airflow
+        image: puckel/docker-airflow:1.10.9
         restart: always
         depends_on:
             - redis
         environment:
             - EXECUTOR=Celery
-            - AIRFLOW__CORE__DEFAULT_TIMEZONE=Asia/Shanghai
-            - AIRFLOW__CORE__FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
             # - REDIS_PASSWORD=redispass
-        volumes:
-            - ./airflow.cfg:/usr/local/airflow/airflow.cfg
         ports:
             - "5555:5555"
         command: flower
 
     scheduler:
-        image: ahrli/docker-airflow
+        image: puckel/docker-airflow:1.10.9
         restart: always
         depends_on:
             - webserver
         volumes:
             - ./dags:/usr/local/airflow/dags
-            - ./logs:/usr/local/airflow/logs
-            - ./airflow.cfg:/usr/local/airflow/airflow.cfg
+            - /dfs/airflow/logs:/usr/local/airflow/logs
+            - ./config/airflow.cfg:/usr/local/airflow/airflow.cfg
             # Uncomment to include custom plugins
             # - ./plugins:/usr/local/airflow/plugins
         environment:
             - LOAD_EX=n
             - FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
             - EXECUTOR=Celery
-            - AIRFLOW__CORE__DEFAULT_TIMEZONE=Asia/Shanghai
-            - AIRFLOW__CORE__FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
             # - POSTGRES_USER=airflow
             # - POSTGRES_PASSWORD=airflow
             # - POSTGRES_DB=airflow
