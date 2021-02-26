@@ -12,7 +12,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: 123456
     volumes:
-            - ./storage:/var/lib/mongodb
+            - ./storage:/data/db
             - ./logs:/var/log/mongodb/mongod.log
 
   mongo-express:
