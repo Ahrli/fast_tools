@@ -12,9 +12,12 @@ services:
     environment:
       MYSQL_USER: root
       MYSQL_ROOT_PASSWORD: example
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+      - ./config/conf.d:/etc/my.cnf
 
   adminer:
     image: adminer
     restart: always
     ports:
-      - 8085:8080
+      - 8085:8086
