@@ -28,3 +28,9 @@
 
 [mysql]
 sql_mode=ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+default-storage-engine=INNODB
+character-set-server=utf8mb4
+collation-server=utf8mb4_general_ci
+
+[client]
+default-character-set=utf8mb4
