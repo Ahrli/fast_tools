@@ -1,0 +1,9 @@
+version: '2.1'
+services:
+
+    spider_kline:
+        image: futuserver:v1
+        restart: always
+        #volumes:
+            #- ./spider_script/log/:/spider_script/log/
+        # command: kline

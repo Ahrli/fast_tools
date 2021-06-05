@@ -1,0 +1,71 @@
+{
+  "buyRule": [
+    {
+      "tradeCondition": [
+        {
+          "clsName": "iAiBuy",
+          "modName": "ai_indicator",
+          "params": {
+            "args": [
+              "1"
+            ],
+            "logic": {
+              "byValue": 0,
+              "compare": "ge",
+              "position": 0
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "sellRule": [
+    {
+      "tradeCondition": [
+        {
+          "clsName": "iAiSell",
+          "modName": "ai_indicator",
+          "params": {
+            "args": [
+              "1"
+            ],
+            "logic": {
+              "byValue": 0,
+              "compare": "ge",
+              "position": 0
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "riskControl": {
+    "afterDaySell": 0,
+    "distribute": 0,
+    "maxAllPositionRate": 0.99,
+    "maxRPS": 0.8,
+    "maxStocks": 2,
+    "maxTimeBuffer": 1,
+    "startCreatePositionTime": 1563978366,
+    "stopLossRate": 0
+  },
+  "commission": 5.0,
+  "stampDuty": 0.001,
+  "startCash": 1000000.0,
+  "strategyExecuteId": "1154035030343946240",
+  "strategyId": "1287",
+  "bullBear": 1,
+  "kline": "finance",
+  "startDay": 1420038000,
+  "endDay": 1595516400,
+  "myStocks": [
+    "SH.600570"
+  ],
+  "topN": 2,
+  "barNum": 5,
+  "minP": 0.1,
+  "bottomV": 0,
+  "topV": 2,
+  "longshort": 1,
+  "sid": 2
+}
